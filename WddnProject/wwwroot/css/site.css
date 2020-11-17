@@ -69,3 +69,24 @@ body {
   white-space: nowrap;
   line-height: 60px; /* Vertically center the text there */
 }
+
+div .login-logout-tab div.card-header {
+    padding : 0px 0px 12px 0px;
+}
+
+div .login-logout-tab ul.nav-tabs {
+    padding: 0px 0px 12px 0px;
+}
+
+div .login-logout-tab li.nav-item {
+    width:50%;
+}
+
+div .login-logout-tab a.nav-link {
+    font-size:25px;
+    text-align:center;
+}
+
+.card-body{
+    margin-left : 5px;
+}

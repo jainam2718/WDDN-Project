@@ -1,6 +1,6 @@
 using System;
 
-namespace WddnProject.Models
+namespace WDDNProject.Models
 {
     public class ErrorViewModel
     {

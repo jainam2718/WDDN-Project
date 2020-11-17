@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -23,7 +24,9 @@ namespace WDDNProject.Controllers
         // GET: Exams
         public async Task<IActionResult> Index()
         {
-            var authDbContext = _context.Exams.Include(e => e.AppUser);
+            var claimsIdentity = (ClaimsIdentity)this.User.Identity;
+            var claim = claimsIdentity.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier);
+            var authDbContext = _context.Exams.Where(e => e.AppEmail == claim.Value);
             return View(await authDbContext.ToListAsync());
         }
 
@@ -45,7 +48,7 @@ namespace WDDNProject.Controllers
 
             return View(exam);
         }
-
+        [Authorize]
         // GET: Exams/Create
         public IActionResult Create()
         {

@@ -12,6 +12,7 @@ using WDDNProject.Models;
 
 namespace WDDNProject.Controllers
 {
+    [Authorize]
     public class ExamsController : Controller
     {
         private readonly AuthDbContext _context;
@@ -26,7 +27,7 @@ namespace WDDNProject.Controllers
         {
             var claimsIdentity = (ClaimsIdentity)this.User.Identity;
             var claim = claimsIdentity.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier);
-            var authDbContext = _context.Exams.Where(e => e.AppEmail == claim.Value);
+            var authDbContext = _context.Exams.Where(e => e.AppUserId == claim.Value);
             return View(await authDbContext.ToListAsync());
         }
 
@@ -48,13 +49,16 @@ namespace WDDNProject.Controllers
 
             return View(exam);
         }
-        [Authorize]
+
         // GET: Exams/Create
         public IActionResult Create()
         {
             var claimsIdentity = (ClaimsIdentity)this.User.Identity;
             var claim = claimsIdentity.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier);
-            ViewData["AppEmail"] = claim.Value;
+            ViewData["AppUserId"] = claim.Value;
+            var stime = DateTime.Now;
+            ViewData["StartTime"] = stime;
+
             return View();
         }
 
@@ -63,15 +67,15 @@ namespace WDDNProject.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("id,Name,AppEmail")] Exam exam)
+        public async Task<IActionResult> Create([Bind("id,Subject,Description,StartTime,EndTime,AppUserId")] Exam exam)
         {
             if (ModelState.IsValid)
             {
                 _context.Add(exam);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Details",new { id = exam.id });
             }
-            ViewData["AppEmail"] = new SelectList(_context.AppUsers, "Id", "Id", exam.AppEmail);
+            ViewData["AppUserId"] = new SelectList(_context.AppUsers, "Id", "Id", exam.AppUserId);
             return View(exam);
         }
 
@@ -88,7 +92,6 @@ namespace WDDNProject.Controllers
             {
                 return NotFound();
             }
-            ViewData["AppEmail"] = new SelectList(_context.AppUsers, "Id", "Id", exam.AppEmail);
             return View(exam);
         }
 
@@ -97,7 +100,7 @@ namespace WDDNProject.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("id,Name,AppEmail")] Exam exam)
+        public async Task<IActionResult> Edit(int id, [Bind("id,Subject,Description,StartTime,EndTime,AppUserId")] Exam exam)
         {
             if (id != exam.id)
             {
@@ -124,7 +127,7 @@ namespace WDDNProject.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["AppEmail"] = new SelectList(_context.AppUsers, "Id", "Id", exam.AppEmail);
+            ViewData["AppUserId"] = new SelectList(_context.AppUsers, "Id", "Id", exam.AppUserId);
             return View(exam);
         }
 

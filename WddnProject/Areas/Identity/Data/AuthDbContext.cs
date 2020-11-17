@@ -22,7 +22,7 @@ namespace WDDNProject.Data
             builder.Entity<Exam>()
                     .HasOne<AppUser>(a => a.AppUser)
                     .WithMany(e => e.Exams)
-                    .HasForeignKey(a => a.AppEmail)
+                    .HasForeignKey(a => a.AppUserId)
                     .OnDelete(DeleteBehavior.Cascade);
             base.OnModelCreating(builder);
             // Customize the ASP.NET Identity model and override the defaults if needed.

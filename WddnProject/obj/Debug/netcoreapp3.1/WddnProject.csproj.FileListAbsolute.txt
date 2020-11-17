@@ -2,7 +2,6 @@ A:\CE117_Sem5\WDDN-2020-21-Students\WDDNProject\WDDN-Project\WDDNProject\bin\Deb
 A:\CE117_Sem5\WDDN-2020-21-Students\WDDNProject\WDDN-Project\WDDNProject\bin\Debug\netcoreapp3.1\appsettings.json
 A:\CE117_Sem5\WDDN-2020-21-Students\WDDNProject\WDDN-Project\WDDNProject\bin\Debug\netcoreapp3.1\Properties\launchSettings.json
 A:\CE117_Sem5\WDDN-2020-21-Students\WDDNProject\WDDN-Project\WDDNProject\bin\Debug\netcoreapp3.1\WDDNProject.exe
-A:\CE117_Sem5\WDDN-2020-21-Students\WDDNProject\WDDN-Project\WDDNProject\obj\Debug\netcoreapp3.1\WDDNProject.csprojAssemblyReference.cache
 A:\CE117_Sem5\WDDN-2020-21-Students\WDDNProject\WDDN-Project\WDDNProject\obj\Debug\netcoreapp3.1\WDDNProject.AssemblyInfoInputs.cache
 A:\CE117_Sem5\WDDN-2020-21-Students\WDDNProject\WDDN-Project\WDDNProject\obj\Debug\netcoreapp3.1\WDDNProject.AssemblyInfo.cs
 A:\CE117_Sem5\WDDN-2020-21-Students\WDDNProject\WDDN-Project\WDDNProject\obj\Debug\netcoreapp3.1\WDDNProject.RazorAssemblyInfo.cache
@@ -223,8 +222,9 @@ A:\CE117_Sem5\WDDN-2020-21-Students\WDDNProject\WDDN-Project\WDDNProject\bin\Deb
 A:\CE117_Sem5\WDDN-2020-21-Students\WDDNProject\WDDN-Project\WDDNProject\obj\Debug\netcoreapp3.1\WDDNProject.csproj.CoreCompileInputs.cache
 A:\CE117_Sem5\WDDN-2020-21-Students\WDDNProject\WDDN-Project\WDDNProject\obj\Debug\netcoreapp3.1\WDDNProject.MvcApplicationPartsAssemblyInfo.cs
 A:\CE117_Sem5\WDDN-2020-21-Students\WDDNProject\WDDN-Project\WDDNProject\obj\Debug\netcoreapp3.1\WDDNProject.MvcApplicationPartsAssemblyInfo.cache
-A:\CE117_Sem5\WDDN-2020-21-Students\WDDNProject\WDDN-Project\WDDNProject\obj\Debug\netcoreapp3.1\Razor\Views\Exams\Create.cshtml.g.cs
+A:\CE117_Sem5\WDDN-2020-21-Students\WDDNProject\WDDN-Project\WDDNProject\obj\Debug\netcoreapp3.1\WDDNProject.csprojAssemblyReference.cache
 A:\CE117_Sem5\WDDN-2020-21-Students\WDDNProject\WDDN-Project\WDDNProject\obj\Debug\netcoreapp3.1\Razor\Views\Exams\Delete.cshtml.g.cs
 A:\CE117_Sem5\WDDN-2020-21-Students\WDDNProject\WDDN-Project\WDDNProject\obj\Debug\netcoreapp3.1\Razor\Views\Exams\Details.cshtml.g.cs
 A:\CE117_Sem5\WDDN-2020-21-Students\WDDNProject\WDDN-Project\WDDNProject\obj\Debug\netcoreapp3.1\Razor\Views\Exams\Edit.cshtml.g.cs
 A:\CE117_Sem5\WDDN-2020-21-Students\WDDNProject\WDDN-Project\WDDNProject\obj\Debug\netcoreapp3.1\Razor\Views\Exams\Index.cshtml.g.cs
+A:\CE117_Sem5\WDDN-2020-21-Students\WDDNProject\WDDN-Project\WDDNProject\obj\Debug\netcoreapp3.1\Razor\Views\Exams\Create.cshtml.g.cs

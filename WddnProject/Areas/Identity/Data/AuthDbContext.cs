@@ -50,12 +50,20 @@ namespace WDDNProject.Data
             builder.Entity<AppUserGroupMember>()
                     .HasKey(ag => new { ag.AppUserId, ag.GroupMemberId });
 
+            builder.Entity<Exam>()
+                .HasMany<Questions>(e => e.Questions)
+                .WithOne(q => q.Exam)
+                .IsRequired()
+                .HasForeignKey(q => q.ExamId)
+                .OnDelete(DeleteBehavior.Cascade);
+
             base.OnModelCreating(builder);
             // Customize the ASP.NET Identity model and override the defaults if needed.
             // For example, you can rename the ASP.NET Identity table names and more.
             // Add your customizations after calling base.OnModelCreating(builder);
         }
         
+        public DbSet<Questions> Questions { get; set; }
         public DbSet<GroupMember> GroupMembers { get; set; }
         public DbSet<Group> Groups { get; set; }
         public DbSet<AppUser> AppUsers { get; set; }

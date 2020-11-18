@@ -201,11 +201,6 @@ A:\CE117_Sem5\WDDN-2020-21-Students\WDDNProject\WDDN-Project\WDDNProject\obj\Deb
 A:\CE117_Sem5\WDDN-2020-21-Students\WDDNProject\WDDN-Project\WDDNProject\obj\Debug\netcoreapp3.1\Razor\Areas\Identity\Pages\_ValidationScriptsPartial.cshtml.g.cs
 A:\CE117_Sem5\WDDN-2020-21-Students\WDDNProject\WDDN-Project\WDDNProject\obj\Debug\netcoreapp3.1\Razor\Areas\Identity\Pages\_ViewImports.cshtml.g.cs
 A:\CE117_Sem5\WDDN-2020-21-Students\WDDNProject\WDDN-Project\WDDNProject\obj\Debug\netcoreapp3.1\Razor\Areas\Identity\Pages\_ViewStart.cshtml.g.cs
-A:\CE117_Sem5\WDDN-2020-21-Students\WDDNProject\WDDN-Project\WDDNProject\obj\Debug\netcoreapp3.1\Razor\Views\Exams\Create.cshtml.g.cs
-A:\CE117_Sem5\WDDN-2020-21-Students\WDDNProject\WDDN-Project\WDDNProject\obj\Debug\netcoreapp3.1\Razor\Views\Exams\Delete.cshtml.g.cs
-A:\CE117_Sem5\WDDN-2020-21-Students\WDDNProject\WDDN-Project\WDDNProject\obj\Debug\netcoreapp3.1\Razor\Views\Exams\Details.cshtml.g.cs
-A:\CE117_Sem5\WDDN-2020-21-Students\WDDNProject\WDDN-Project\WDDNProject\obj\Debug\netcoreapp3.1\Razor\Views\Exams\Edit.cshtml.g.cs
-A:\CE117_Sem5\WDDN-2020-21-Students\WDDNProject\WDDN-Project\WDDNProject\obj\Debug\netcoreapp3.1\Razor\Views\Exams\Index.cshtml.g.cs
 A:\CE117_Sem5\WDDN-2020-21-Students\WDDNProject\WDDN-Project\WDDNProject\obj\Debug\netcoreapp3.1\Razor\Views\Home\Index.cshtml.g.cs
 A:\CE117_Sem5\WDDN-2020-21-Students\WDDNProject\WDDN-Project\WDDNProject\obj\Debug\netcoreapp3.1\Razor\Views\Home\Privacy.cshtml.g.cs
 A:\CE117_Sem5\WDDN-2020-21-Students\WDDNProject\WDDN-Project\WDDNProject\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Error.cshtml.g.cs
@@ -228,3 +223,13 @@ A:\CE117_Sem5\WDDN-2020-21-Students\WDDNProject\WDDN-Project\WDDNProject\bin\Deb
 A:\CE117_Sem5\WDDN-2020-21-Students\WDDNProject\WDDN-Project\WDDNProject\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Configuration.dll
 A:\CE117_Sem5\WDDN-2020-21-Students\WDDNProject\WDDN-Project\WDDNProject\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Configuration.Binder.dll
 A:\CE117_Sem5\WDDN-2020-21-Students\WDDNProject\WDDN-Project\WDDNProject\obj\Debug\netcoreapp3.1\WDDNProject.csprojAssemblyReference.cache
+A:\CE117_Sem5\WDDN-2020-21-Students\WDDNProject\WDDN-Project\WDDNProject\obj\Debug\netcoreapp3.1\Razor\Views\Exams\Create.cshtml.g.cs
+A:\CE117_Sem5\WDDN-2020-21-Students\WDDNProject\WDDN-Project\WDDNProject\obj\Debug\netcoreapp3.1\Razor\Views\Exams\Delete.cshtml.g.cs
+A:\CE117_Sem5\WDDN-2020-21-Students\WDDNProject\WDDN-Project\WDDNProject\obj\Debug\netcoreapp3.1\Razor\Views\Exams\Details.cshtml.g.cs
+A:\CE117_Sem5\WDDN-2020-21-Students\WDDNProject\WDDN-Project\WDDNProject\obj\Debug\netcoreapp3.1\Razor\Views\Exams\Edit.cshtml.g.cs
+A:\CE117_Sem5\WDDN-2020-21-Students\WDDNProject\WDDN-Project\WDDNProject\obj\Debug\netcoreapp3.1\Razor\Views\Exams\Index.cshtml.g.cs
+A:\CE117_Sem5\WDDN-2020-21-Students\WDDNProject\WDDN-Project\WDDNProject\obj\Debug\netcoreapp3.1\Razor\Views\Questions\Create.cshtml.g.cs
+A:\CE117_Sem5\WDDN-2020-21-Students\WDDNProject\WDDN-Project\WDDNProject\obj\Debug\netcoreapp3.1\Razor\Views\Questions\Delete.cshtml.g.cs
+A:\CE117_Sem5\WDDN-2020-21-Students\WDDNProject\WDDN-Project\WDDNProject\obj\Debug\netcoreapp3.1\Razor\Views\Questions\Details.cshtml.g.cs
+A:\CE117_Sem5\WDDN-2020-21-Students\WDDNProject\WDDN-Project\WDDNProject\obj\Debug\netcoreapp3.1\Razor\Views\Questions\Edit.cshtml.g.cs
+A:\CE117_Sem5\WDDN-2020-21-Students\WDDNProject\WDDN-Project\WDDNProject\obj\Debug\netcoreapp3.1\Razor\Views\Questions\Index.cshtml.g.cs

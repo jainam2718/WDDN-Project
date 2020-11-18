@@ -1,4 +1,4 @@
-﻿@model IEnumerable<WDDNProject.Models.Exam>
+﻿@model IEnumerable<WDDNProject.Models.Questions>
 
 @{
     ViewData["Title"] = "Index";
@@ -14,22 +14,25 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Subject)
+                @Html.DisplayNameFor(model => model.question)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Description)
+                @Html.DisplayNameFor(model => model.option1)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.StartTime)
+                @Html.DisplayNameFor(model => model.option2)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.EndTime)
+                @Html.DisplayNameFor(model => model.option3)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.AppUser)
+                @Html.DisplayNameFor(model => model.option4)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Group)
+                @Html.DisplayNameFor(model => model.ans)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Exam)
             </th>
             <th></th>
         </tr>
@@ -38,22 +41,25 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Subject)
+                @Html.DisplayFor(modelItem => item.question)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Description)
+                @Html.DisplayFor(modelItem => item.option1)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.StartTime)
+                @Html.DisplayFor(modelItem => item.option2)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.EndTime)
+                @Html.DisplayFor(modelItem => item.option3)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.AppUser.Id)
+                @Html.DisplayFor(modelItem => item.option4)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Group.AppUserId)
+                @Html.DisplayFor(modelItem => item.ans)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Exam.AppUserId)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.id">Edit</a> |

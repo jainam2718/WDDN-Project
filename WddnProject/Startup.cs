@@ -11,6 +11,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using WDDNProject.Areas.Identity.Data;
 using WDDNProject.Data;
+using WDDNProject.Models;
+using WDDNProject.Repository.Implementations;
+using WDDNProject.Repository.Interfaces;
 
 namespace WDDNProject
 {
@@ -26,13 +29,16 @@ namespace WDDNProject
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContextPool<AuthDbContext>(options =>
-                   options.UseSqlServer(
+            services.AddDbContext<AuthDbContext>(options =>
+            options.UseSqlServer(
                        Configuration.GetConnectionString("AuthDbContextConnection")));
             services.AddDefaultIdentity<AppUser>(options => options.SignIn.RequireConfirmedAccount = true)
                     .AddEntityFrameworkStores<AuthDbContext>();
             services.AddControllersWithViews();
             services.AddRazorPages();
+            services.AddTransient<IExamRepository, ExamRepository>();
+            services.AddTransient<IQuestionsRepository, QuestionsRepository>();
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

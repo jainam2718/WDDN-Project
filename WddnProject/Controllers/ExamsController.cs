@@ -6,20 +6,19 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
 using WDDNProject.Data;
 using WDDNProject.Models;
+using WDDNProject.Repository.Interfaces;
 
 namespace WDDNProject.Controllers
 {
     [Authorize]
     public class ExamsController : Controller
     {
-        private readonly AuthDbContext _context;
-
-        public ExamsController(AuthDbContext context)
+        private readonly IExamRepository _examRepository;
+        public ExamsController( IExamRepository examRepository)
         {
-            _context = context;
+            this._examRepository = examRepository;
         }
 
         // GET: Exams
@@ -27,11 +26,8 @@ namespace WDDNProject.Controllers
         {
             var claimsIdentity = (ClaimsIdentity)this.User.Identity;
             var claim = claimsIdentity.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier);
-
-            var authDbContext = _context.Exams.Include(e => e.AppUser)
-                                              .Include(e => e.Group)
-                                              .Where(e => e.AppUserId == claim.Value );
-            return View(await authDbContext.ToListAsync());
+            var exam = await _examRepository.GetExamsByAppUserId(claim.Value);
+            return View(exam);
         }
 
         // GET: Exams/Details/5
@@ -42,10 +38,7 @@ namespace WDDNProject.Controllers
                 return NotFound();
             }
 
-            var exam = await _context.Exams
-                .Include(e => e.AppUser)
-                .Include(e => e.Group)
-                .FirstOrDefaultAsync(m => m.id == id);
+            var exam = await this._examRepository.GetExamById((int)id);
             if (exam == null)
             {
                 return NotFound();
@@ -62,7 +55,7 @@ namespace WDDNProject.Controllers
             ViewData["AppUserId"] = claim.Value;
             var stime = DateTime.Now;
             ViewData["StartTime"] = stime;
-            ViewData["GroupId"] = new SelectList(_context.Groups, "id", "AppUserId");
+            //ViewData["GroupId"] = new SelectList(_context.Groups, "id", "AppUserId");
             return View();
         }
 
@@ -75,12 +68,13 @@ namespace WDDNProject.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(exam);
-                await _context.SaveChangesAsync();
+                var temp = await this._examRepository.CreateExam(exam);
                 return RedirectToAction("Details",new { id = exam.id});
             }
-            ViewData["AppUserId"] = new SelectList(_context.AppUsers, "Id", "Id", exam.AppUserId);
-            ViewData["GroupId"] = new SelectList(_context.Groups, "id", "AppUserId", exam.GroupId);
+            var claimsIdentity = (ClaimsIdentity)this.User.Identity;
+            var claim = claimsIdentity.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier);
+            ViewData["AppUserId"] = claim.Value;
+            //ViewData["GroupId"] = new SelectList(_context.Groups, "id", "AppUserId", exam.GroupId);
             return View(exam);
         }
 
@@ -92,19 +86,18 @@ namespace WDDNProject.Controllers
                 return NotFound();
             }
 
-            var exam = await _context.Exams.FindAsync(id);
+            var exam = await this._examRepository.GetExamById((int)id);
             if (exam == null)
             {
                 return NotFound();
             }
-            ViewData["AppUserId"] = new SelectList(_context.AppUsers, "Id", "Id", exam.AppUserId);
-            ViewData["GroupId"] = new SelectList(_context.Groups, "id", "AppUserId", exam.GroupId);
+            var claimsIdentity = (ClaimsIdentity)this.User.Identity;
+            var claim = claimsIdentity.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier);
+            ViewData["AppUserId"] = claim.Value;
+            //ViewData["GroupId"] = new SelectList(_context.Groups, "id", "AppUserId", exam.GroupId);
             return View(exam);
         }
 
-        // POST: Exams/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("id,Subject,Description,StartTime,EndTime,AppUserId,GroupId")] Exam exam)
@@ -116,26 +109,17 @@ namespace WDDNProject.Controllers
 
             if (ModelState.IsValid)
             {
-                try
+                bool check = await this._examRepository.UpdateExam(exam);
+                if (!check)
                 {
-                    _context.Update(exam);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!ExamExists(exam.id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
+                    return NotFound();   
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["AppUserId"] = new SelectList(_context.AppUsers, "Id", "Id", exam.AppUserId);
-            ViewData["GroupId"] = new SelectList(_context.Groups, "id", "AppUserId", exam.GroupId);
+            var claimsIdentity = (ClaimsIdentity)this.User.Identity;
+            var claim = claimsIdentity.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier);
+            ViewData["AppUserId"] = claim.Value;
+            //ViewData["GroupId"] = new SelectList(_context.Groups, "id", "AppUserId", exam.GroupId);
             return View(exam);
         }
 
@@ -147,10 +131,7 @@ namespace WDDNProject.Controllers
                 return NotFound();
             }
 
-            var exam = await _context.Exams
-                .Include(e => e.AppUser)
-                .Include(e => e.Group)
-                .FirstOrDefaultAsync(m => m.id == id);
+            var exam = await _examRepository.GetExamById((int)id);
             if (exam == null)
             {
                 return NotFound();
@@ -164,15 +145,9 @@ namespace WDDNProject.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var exam = await _context.Exams.FindAsync(id);
-            _context.Exams.Remove(exam);
-            await _context.SaveChangesAsync();
+            var temp = await this._examRepository.DeleteExam(id);
             return RedirectToAction(nameof(Index));
         }
 
-        private bool ExamExists(int id)
-        {
-            return _context.Exams.Any(e => e.id == id);
-        }
     }
 }

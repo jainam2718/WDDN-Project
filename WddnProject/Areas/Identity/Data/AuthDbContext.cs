@@ -24,13 +24,19 @@ namespace WDDNProject.Data
                     .WithMany(e => e.Exams)
                     .HasForeignKey(a => a.AppUserId)
                     .OnDelete(DeleteBehavior.Cascade);
+            builder.Entity<Questions>()
+                    .HasOne<Exam>(a => a.Exam)
+                    .WithMany(e => e.Questions)
+                    .HasForeignKey(a => a.examID)
+                    .OnDelete(DeleteBehavior.Cascade);
             base.OnModelCreating(builder);
             // Customize the ASP.NET Identity model and override the defaults if needed.
             // For example, you can rename the ASP.NET Identity table names and more.
             // Add your customizations after calling base.OnModelCreating(builder);
         }
         
-                public DbSet<AppUser> AppUsers { get; set; }
+        public DbSet<AppUser> AppUsers { get; set; }
         public DbSet<Exam> Exams { get; set; }
+        public DbSet<WDDNProject.Models.Questions> Questions { get; set; }
     }
 }

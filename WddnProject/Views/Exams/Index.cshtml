@@ -47,7 +47,7 @@
                 @Html.DisplayFor(modelItem => item.EndTime)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.AppUser.Id)
+                @Html.DisplayFor(modelItem => item.AppUser.FirstName) @Html.DisplayFor(modelItem => item.AppUser.LastName)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.id">Edit</a> |

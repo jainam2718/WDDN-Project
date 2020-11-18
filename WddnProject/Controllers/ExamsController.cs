@@ -4,6 +4,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -27,7 +28,7 @@ namespace WDDNProject.Controllers
         {
             var claimsIdentity = (ClaimsIdentity)this.User.Identity;
             var claim = claimsIdentity.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier);
-            var authDbContext = _context.Exams.Where(e => e.AppUserId == claim.Value);
+            var authDbContext = _context.Exams.Where(e => e.AppUserId == claim.Value).Include(e => e.AppUser);
             return View(await authDbContext.ToListAsync());
         }
 
@@ -41,6 +42,7 @@ namespace WDDNProject.Controllers
 
             var exam = await _context.Exams
                 .Include(e => e.AppUser)
+                .Include(e => e.Questions)
                 .FirstOrDefaultAsync(m => m.id == id);
             if (exam == null)
             {
@@ -73,7 +75,7 @@ namespace WDDNProject.Controllers
             {
                 _context.Add(exam);
                 await _context.SaveChangesAsync();
-                return RedirectToAction("Details",new { id = exam.id });
+                return RedirectToAction("Create", "Questions",new { id = exam.id });
             }
             ViewData["AppUserId"] = new SelectList(_context.AppUsers, "Id", "Id", exam.AppUserId);
             return View(exam);

@@ -71,9 +71,15 @@ namespace WDDNProject.Repository.Implementations
             var exam = await _context.Exams.FindAsync(id);
             _context.Exams.Remove(exam);
             return await _context.SaveChangesAsync();
-
         }
 
+        public async Task<IEnumerable<Exam>> GetExamsByGroupId(int id)
+        {
+            return await _context.Exams.Include(e => e.AppUser)
+                                              .Include(e => e.Group)
+                                              .Where(e => e.GroupId == id)
+                                              .ToListAsync();
+        } 
         public bool ExamExists(int id)
         {
             return _context.Exams.Any(e => e.id == id);

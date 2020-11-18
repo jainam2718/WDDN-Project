@@ -47,11 +47,13 @@ namespace WDDNProject.Controllers
         }
 
         // GET: Questions/Create
-        public IActionResult Create()
+        public IActionResult Create(int? examId)
         {
-            var claimsIdentity = (ClaimsIdentity)this.User.Identity;
-            var claim = claimsIdentity.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier);
-            ViewData["ExamId"] = new SelectList(_context.Exams.Where(e => e.AppUserId == claim.Value ), "id", "id");
+            if(examId == null)
+            {
+                return NotFound();
+            }
+            ViewData["ExamId"] = (int)examId;
             return View();
         }
 

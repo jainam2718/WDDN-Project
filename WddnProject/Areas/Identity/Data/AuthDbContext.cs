@@ -43,9 +43,9 @@ namespace WDDNProject.Data
 
             builder.Entity<Group>()
                     .HasOne<GroupMember>(g => g.GroupMember)
-                    .WithMany(gm => gm.Groups)
-                    .HasForeignKey(g => g.GroupMemberId)
-                    .OnDelete(DeleteBehavior.NoAction);
+                    .WithOne(gm => gm.Group)
+                    .HasForeignKey<GroupMember>(gm => gm.GroupId)
+                    .OnDelete(DeleteBehavior.SetNull);
 
             builder.Entity<AppUserGroupMember>()
                     .HasKey(ag => new { ag.AppUserId, ag.GroupMemberId });
@@ -63,6 +63,7 @@ namespace WDDNProject.Data
             // Add your customizations after calling base.OnModelCreating(builder);
         }
         
+        public DbSet<AppUserGroupMember> AppUserGroupMembers { get; set; }
         public DbSet<Questions> Questions { get; set; }
         public DbSet<GroupMember> GroupMembers { get; set; }
         public DbSet<Group> Groups { get; set; }

@@ -29,7 +29,7 @@ namespace WDDNProject
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<AuthDbContext>(options =>
+            services.AddDbContextPool<AuthDbContext>(options =>
             options.UseSqlServer(
                        Configuration.GetConnectionString("AuthDbContextConnection")));
             services.AddDefaultIdentity<AppUser>(options => options.SignIn.RequireConfirmedAccount = true)
@@ -38,7 +38,12 @@ namespace WDDNProject
             services.AddRazorPages();
             services.AddTransient<IExamRepository, ExamRepository>();
             services.AddTransient<IQuestionsRepository, QuestionsRepository>();
-            
+
+            services.AddTransient<IGroupRepository, GroupRepository>();
+            services.AddTransient<IAppUserGroupMemberRepository, AppUserGroupMemberRepository>();
+
+            services.AddTransient<IGroupMemberRepository, GroupMemberRepository>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

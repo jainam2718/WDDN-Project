@@ -15,7 +15,7 @@ namespace WDDNProject.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.9")
+                .HasAnnotation("ProductVersion", "3.1.10")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -234,7 +234,7 @@ namespace WDDNProject.Migrations
 
                     b.HasIndex("GroupMemberId");
 
-                    b.ToTable("AppUserGroupMember");
+                    b.ToTable("AppUserGroupMembers");
                 });
 
             modelBuilder.Entity("WDDNProject.Models.Exam", b =>
@@ -294,8 +294,6 @@ namespace WDDNProject.Migrations
 
                     b.HasIndex("AppUserId");
 
-                    b.HasIndex("GroupMemberId");
-
                     b.ToTable("Groups");
                 });
 
@@ -306,7 +304,17 @@ namespace WDDNProject.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int?>("GroupId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("id");
+
+                    b.HasIndex("GroupId")
+                        .IsUnique()
+                        .HasFilter("[GroupId] IS NOT NULL");
 
                     b.ToTable("GroupMembers");
                 });
@@ -433,11 +441,14 @@ namespace WDDNProject.Migrations
                         .HasForeignKey("AppUserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
 
-                    b.HasOne("WDDNProject.Models.GroupMember", "GroupMember")
-                        .WithMany("Groups")
-                        .HasForeignKey("GroupMemberId")
-                        .OnDelete(DeleteBehavior.NoAction);
+            modelBuilder.Entity("WDDNProject.Models.GroupMember", b =>
+                {
+                    b.HasOne("WDDNProject.Models.Group", "Group")
+                        .WithOne("GroupMember")
+                        .HasForeignKey("WDDNProject.Models.GroupMember", "GroupId")
+                        .OnDelete(DeleteBehavior.SetNull);
                 });
 
             modelBuilder.Entity("WDDNProject.Models.Questions", b =>

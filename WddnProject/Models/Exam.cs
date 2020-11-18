@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 using WDDNProject.Areas.Identity.Data;
+using WDDNProject.Data;
 
 namespace WDDNProject.Models
 {
@@ -23,6 +24,15 @@ namespace WDDNProject.Models
 
         public String AppUserId { get; set; }
         public virtual AppUser AppUser { get; set; }
+
+        public int? GroupId { get; set; }
+        public virtual Group Group {get; set;}
+
+        public virtual ICollection<Questions> Questions { get; set; }
     }
+
+
+
+
 
 }

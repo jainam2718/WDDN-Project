@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WDDNProject.Data;
 
 namespace WDDNProject.Migrations
 {
     [DbContext(typeof(AuthDbContext))]
-    partial class AuthDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201118084408_AppUserGroupMember1")]
+    partial class AppUserGroupMember1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -311,41 +313,6 @@ namespace WDDNProject.Migrations
                     b.ToTable("GroupMembers");
                 });
 
-            modelBuilder.Entity("WDDNProject.Models.Questions", b =>
-                {
-                    b.Property<int>("id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("ExamId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ans")
-                        .HasColumnType("int");
-
-                    b.Property<string>("option1")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("option2")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("option3")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("option4")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("question")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("id");
-
-                    b.HasIndex("ExamId");
-
-                    b.ToTable("Questions");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -438,15 +405,6 @@ namespace WDDNProject.Migrations
                         .WithMany("Groups")
                         .HasForeignKey("GroupMemberId")
                         .OnDelete(DeleteBehavior.NoAction);
-                });
-
-            modelBuilder.Entity("WDDNProject.Models.Questions", b =>
-                {
-                    b.HasOne("WDDNProject.Models.Exam", "Exam")
-                        .WithMany("Questions")
-                        .HasForeignKey("ExamId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

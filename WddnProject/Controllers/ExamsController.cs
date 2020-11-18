@@ -27,7 +27,10 @@ namespace WDDNProject.Controllers
         {
             var claimsIdentity = (ClaimsIdentity)this.User.Identity;
             var claim = claimsIdentity.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier);
-            var authDbContext = _context.Exams.Where(e => e.AppUserId == claim.Value);
+
+            var authDbContext = _context.Exams.Include(e => e.AppUser)
+                                              .Include(e => e.Group)
+                                              .Where(e => e.AppUserId == claim.Value );
             return View(await authDbContext.ToListAsync());
         }
 
@@ -41,6 +44,7 @@ namespace WDDNProject.Controllers
 
             var exam = await _context.Exams
                 .Include(e => e.AppUser)
+                .Include(e => e.Group)
                 .FirstOrDefaultAsync(m => m.id == id);
             if (exam == null)
             {
@@ -58,7 +62,7 @@ namespace WDDNProject.Controllers
             ViewData["AppUserId"] = claim.Value;
             var stime = DateTime.Now;
             ViewData["StartTime"] = stime;
-
+            ViewData["GroupId"] = new SelectList(_context.Groups, "id", "AppUserId");
             return View();
         }
 
@@ -67,15 +71,16 @@ namespace WDDNProject.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("id,Subject,Description,StartTime,EndTime,AppUserId")] Exam exam)
+        public async Task<IActionResult> Create([Bind("id,Subject,Description,StartTime,EndTime,AppUserId,GroupId")] Exam exam)
         {
             if (ModelState.IsValid)
             {
                 _context.Add(exam);
                 await _context.SaveChangesAsync();
-                return RedirectToAction("Details",new { id = exam.id });
+                return RedirectToAction("Details",new { id = exam.id});
             }
             ViewData["AppUserId"] = new SelectList(_context.AppUsers, "Id", "Id", exam.AppUserId);
+            ViewData["GroupId"] = new SelectList(_context.Groups, "id", "AppUserId", exam.GroupId);
             return View(exam);
         }
 
@@ -92,6 +97,8 @@ namespace WDDNProject.Controllers
             {
                 return NotFound();
             }
+            ViewData["AppUserId"] = new SelectList(_context.AppUsers, "Id", "Id", exam.AppUserId);
+            ViewData["GroupId"] = new SelectList(_context.Groups, "id", "AppUserId", exam.GroupId);
             return View(exam);
         }
 
@@ -100,7 +107,7 @@ namespace WDDNProject.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("id,Subject,Description,StartTime,EndTime,AppUserId")] Exam exam)
+        public async Task<IActionResult> Edit(int id, [Bind("id,Subject,Description,StartTime,EndTime,AppUserId,GroupId")] Exam exam)
         {
             if (id != exam.id)
             {
@@ -128,6 +135,7 @@ namespace WDDNProject.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["AppUserId"] = new SelectList(_context.AppUsers, "Id", "Id", exam.AppUserId);
+            ViewData["GroupId"] = new SelectList(_context.Groups, "id", "AppUserId", exam.GroupId);
             return View(exam);
         }
 
@@ -141,6 +149,7 @@ namespace WDDNProject.Controllers
 
             var exam = await _context.Exams
                 .Include(e => e.AppUser)
+                .Include(e => e.Group)
                 .FirstOrDefaultAsync(m => m.id == id);
             if (exam == null)
             {

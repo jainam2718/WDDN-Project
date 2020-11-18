@@ -219,6 +219,24 @@ namespace WDDNProject.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
+            modelBuilder.Entity("WDDNProject.Models.AppUserGroupMember", b =>
+                {
+                    b.Property<string>("AppUserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("GroupMemberId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("id")
+                        .HasColumnType("int");
+
+                    b.HasKey("AppUserId", "GroupMemberId");
+
+                    b.HasIndex("GroupMemberId");
+
+                    b.ToTable("AppUserGroupMember");
+                });
+
             modelBuilder.Entity("WDDNProject.Models.Exam", b =>
                 {
                     b.Property<int>("id")
@@ -227,6 +245,7 @@ namespace WDDNProject.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("AppUserId")
+                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Description")
@@ -234,6 +253,9 @@ namespace WDDNProject.Migrations
 
                     b.Property<DateTime>("EndTime")
                         .HasColumnType("datetime2");
+
+                    b.Property<int?>("GroupId")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("StartTime")
                         .HasColumnType("datetime2");
@@ -246,7 +268,82 @@ namespace WDDNProject.Migrations
 
                     b.HasIndex("AppUserId");
 
+                    b.HasIndex("GroupId");
+
                     b.ToTable("Exams");
+                });
+
+            modelBuilder.Entity("WDDNProject.Models.Group", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("AppUserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int?>("GroupMemberId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("id");
+
+                    b.HasIndex("AppUserId");
+
+                    b.HasIndex("GroupMemberId");
+
+                    b.ToTable("Groups");
+                });
+
+            modelBuilder.Entity("WDDNProject.Models.GroupMember", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.HasKey("id");
+
+                    b.ToTable("GroupMembers");
+                });
+
+            modelBuilder.Entity("WDDNProject.Models.Questions", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("ExamId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ans")
+                        .HasColumnType("int");
+
+                    b.Property<string>("option1")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("option2")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("option3")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("option4")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("question")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("id");
+
+                    b.HasIndex("ExamId");
+
+                    b.ToTable("Questions");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -300,12 +397,56 @@ namespace WDDNProject.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("WDDNProject.Models.AppUserGroupMember", b =>
+                {
+                    b.HasOne("WDDNProject.Areas.Identity.Data.AppUser", "AppUser")
+                        .WithMany("AppUserGroupMembers")
+                        .HasForeignKey("AppUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("WDDNProject.Models.GroupMember", "GroupMember")
+                        .WithMany("AppUserGroupMembers")
+                        .HasForeignKey("GroupMemberId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("WDDNProject.Models.Exam", b =>
                 {
                     b.HasOne("WDDNProject.Areas.Identity.Data.AppUser", "AppUser")
                         .WithMany("Exams")
                         .HasForeignKey("AppUserId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("WDDNProject.Models.Group", "Group")
+                        .WithMany("Exams")
+                        .HasForeignKey("GroupId")
+                        .OnDelete(DeleteBehavior.NoAction);
+                });
+
+            modelBuilder.Entity("WDDNProject.Models.Group", b =>
+                {
+                    b.HasOne("WDDNProject.Areas.Identity.Data.AppUser", "AppUser")
+                        .WithMany("Groups")
+                        .HasForeignKey("AppUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("WDDNProject.Models.GroupMember", "GroupMember")
+                        .WithMany("Groups")
+                        .HasForeignKey("GroupMemberId")
+                        .OnDelete(DeleteBehavior.NoAction);
+                });
+
+            modelBuilder.Entity("WDDNProject.Models.Questions", b =>
+                {
+                    b.HasOne("WDDNProject.Models.Exam", "Exam")
+                        .WithMany("Questions")
+                        .HasForeignKey("ExamId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

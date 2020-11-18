@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WDDNProject.Data;
 
 namespace WDDNProject.Migrations
 {
     [DbContext(typeof(AuthDbContext))]
-    partial class AuthDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201118083207_GroupAppUser1")]
+    partial class GroupAppUser1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -219,24 +221,6 @@ namespace WDDNProject.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
-            modelBuilder.Entity("WDDNProject.Models.AppUserGroupMember", b =>
-                {
-                    b.Property<string>("AppUserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("GroupMemberId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("id")
-                        .HasColumnType("int");
-
-                    b.HasKey("AppUserId", "GroupMemberId");
-
-                    b.HasIndex("GroupMemberId");
-
-                    b.ToTable("AppUserGroupMember");
-                });
-
             modelBuilder.Entity("WDDNProject.Models.Exam", b =>
                 {
                     b.Property<int>("id")
@@ -281,11 +265,7 @@ namespace WDDNProject.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("AppUserId")
-                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
-
-                    b.Property<int?>("GroupMemberId")
-                        .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
@@ -294,21 +274,7 @@ namespace WDDNProject.Migrations
 
                     b.HasIndex("AppUserId");
 
-                    b.HasIndex("GroupMemberId");
-
                     b.ToTable("Groups");
-                });
-
-            modelBuilder.Entity("WDDNProject.Models.GroupMember", b =>
-                {
-                    b.Property<int>("id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.HasKey("id");
-
-                    b.ToTable("GroupMembers");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -362,21 +328,6 @@ namespace WDDNProject.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("WDDNProject.Models.AppUserGroupMember", b =>
-                {
-                    b.HasOne("WDDNProject.Areas.Identity.Data.AppUser", "AppUser")
-                        .WithMany("AppUserGroupMembers")
-                        .HasForeignKey("AppUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("WDDNProject.Models.GroupMember", "GroupMember")
-                        .WithMany("AppUserGroupMembers")
-                        .HasForeignKey("GroupMemberId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("WDDNProject.Models.Exam", b =>
                 {
                     b.HasOne("WDDNProject.Areas.Identity.Data.AppUser", "AppUser")
@@ -396,13 +347,7 @@ namespace WDDNProject.Migrations
                     b.HasOne("WDDNProject.Areas.Identity.Data.AppUser", "AppUser")
                         .WithMany("Groups")
                         .HasForeignKey("AppUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("WDDNProject.Models.GroupMember", "GroupMember")
-                        .WithMany("Groups")
-                        .HasForeignKey("GroupMemberId")
-                        .OnDelete(DeleteBehavior.NoAction);
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }

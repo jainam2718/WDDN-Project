@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -8,6 +9,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using WDDNProject.Data;
 using WDDNProject.Models;
+using WDDNProject.Repository.Interfaces;
 
 namespace WDDNProject.Controllers
 {
@@ -15,19 +17,17 @@ namespace WDDNProject.Controllers
     public class QuestionsController : Controller
     {
         private readonly AuthDbContext _context;
+        private readonly IQuestionsRepository _questionsRepository;
 
-        public QuestionsController(AuthDbContext context)
+
+        public QuestionsController(AuthDbContext context,IQuestionsRepository questionsRepository)
         {
             _context = context;
+            this._questionsRepository = questionsRepository;
+            
         }
 
-        // GET: Questions
-        public async Task<IActionResult> Index()
-        {
-
-            var authDbContext = _context.Questions.Include(q => q.Exam);
-            return View(await authDbContext.ToListAsync());
-        }
+        
 
         // GET: Questions/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -37,9 +37,7 @@ namespace WDDNProject.Controllers
                 return NotFound();
             }
 
-            var questions = await _context.Questions
-                .Include(q => q.Exam)
-                .FirstOrDefaultAsync(m => m.id == id);
+            var questions = await this._questionsRepository.GetQuestionsById((int)id);
             if (questions == null)
             {
                 return NotFound();
@@ -51,7 +49,9 @@ namespace WDDNProject.Controllers
         // GET: Questions/Create
         public IActionResult Create()
         {
-            ViewData["ExamId"] = new SelectList(_context.Exams, "id", "id");
+            var claimsIdentity = (ClaimsIdentity)this.User.Identity;
+            var claim = claimsIdentity.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier);
+            ViewData["ExamId"] = new SelectList(_context.Exams.Where(e => e.AppUserId == claim.Value ), "id", "id");
             return View();
         }
 
@@ -64,11 +64,12 @@ namespace WDDNProject.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(questions);
-                await _context.SaveChangesAsync();
+                var temp = await this._questionsRepository.CreateQuestion(questions);
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ExamId"] = new SelectList(_context.Exams, "id", "AppUserId", questions.ExamId);
+            var claimsIdentity = (ClaimsIdentity)this.User.Identity;
+            var claim = claimsIdentity.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier);
+            ViewData["ExamId"] = new SelectList(_context.Exams.Where(e => e.AppUserId == claim.Value), "id", "AppUserId", questions.ExamId);
             return View(questions);
         }
 
@@ -80,12 +81,14 @@ namespace WDDNProject.Controllers
                 return NotFound();
             }
 
-            var questions = await _context.Questions.FindAsync(id);
+            var questions = await this._questionsRepository.GetQuestionsById((int)id);
             if (questions == null)
             {
                 return NotFound();
             }
-            ViewData["ExamId"] = new SelectList(_context.Exams, "id", "AppUserId", questions.ExamId);
+            var claimsIdentity = (ClaimsIdentity)this.User.Identity;
+            var claim = claimsIdentity.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier);
+            ViewData["ExamId"] = new SelectList(_context.Exams.Where(e => e.AppUserId == claim.Value) , "id", "AppUserId", questions.ExamId);
             return View(questions);
         }
 
@@ -103,25 +106,16 @@ namespace WDDNProject.Controllers
 
             if (ModelState.IsValid)
             {
-                try
+                bool check = await this._questionsRepository.UpdateQuestion(questions);
+                if(!check)
                 {
-                    _context.Update(questions);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!QuestionsExists(questions.id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
+                    return NotFound();
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ExamId"] = new SelectList(_context.Exams, "id", "AppUserId", questions.ExamId);
+            var claimsIdentity = (ClaimsIdentity)this.User.Identity;
+            var claim = claimsIdentity.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier);
+            ViewData["ExamId"] = new SelectList(_context.Exams.Where(e => e.AppUserId == claim.Value), "id", "AppUserId", questions.ExamId);
             return View(questions);
         }
 
@@ -133,9 +127,7 @@ namespace WDDNProject.Controllers
                 return NotFound();
             }
 
-            var questions = await _context.Questions
-                .Include(q => q.Exam)
-                .FirstOrDefaultAsync(m => m.id == id);
+            var questions = await this._questionsRepository.GetQuestionsById((int)id);
             if (questions == null)
             {
                 return NotFound();
@@ -149,15 +141,9 @@ namespace WDDNProject.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var questions = await _context.Questions.FindAsync(id);
-            _context.Questions.Remove(questions);
-            await _context.SaveChangesAsync();
+            await this._questionsRepository.DeleteQuestion(id);
             return RedirectToAction(nameof(Index));
         }
 
-        private bool QuestionsExists(int id)
-        {
-            return _context.Questions.Any(e => e.id == id);
-        }
     }
 }

@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 using WDDNProject.Areas.Identity.Data;
+using WDDNProject.Data;
 
 namespace WDDNProject.Models
 {
@@ -29,5 +30,9 @@ namespace WDDNProject.Models
 
         public virtual ICollection<Questions> Questions { get; set; }
     }
+
+
+
+
 
 }

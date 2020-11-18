@@ -17,4 +17,5 @@ namespace WDDNProject.Areas.Identity.Data
 
         public virtual IList<AppUserGroupMember> AppUserGroupMembers { get; set; }
     }
+
 }

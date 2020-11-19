@@ -43,7 +43,6 @@ namespace WDDNProject
             services.AddTransient<IAppUserGroupMemberRepository, AppUserGroupMemberRepository>();
 
             services.AddTransient<IGroupMemberRepository, GroupMemberRepository>();
-            services.AddTransient<IResultRepository, ResultRepository>();
 
         }
 

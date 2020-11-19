@@ -9,7 +9,7 @@ using WDDNProject.Repository.Interfaces;
 
 namespace WDDNProject.Repository.Implementations
 {
-    public class GroupMemberRepository : IGroupMemberRepository
+    public class GroupMemberRepository: IGroupMemberRepository
     {
         private readonly AuthDbContext _context;
 

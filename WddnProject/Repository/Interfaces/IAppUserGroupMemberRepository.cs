@@ -11,7 +11,7 @@ namespace WDDNProject.Repository.Interfaces
         Task<IEnumerable<AppUserGroupMember>> GetAppUserGroupMembersByAppUserId(String id);
         Task<IEnumerable<AppUserGroupMember>> GetAppUserGroupMembersByGroupMemberId(int id);
         Task<int> CreateAppUserGroupMember(AppUserGroupMember appUserGroupMember);
-        Task<int> DeleteAppUserGroupMember(int id);
+        Task<int> DeleteAppUserGroupMember(AppUserGroupMember appUserGroupMember);
 
     }
 }

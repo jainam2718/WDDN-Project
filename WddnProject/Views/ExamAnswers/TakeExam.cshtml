@@ -1,0 +1,36 @@
+﻿@model WDDNProject.Models.Exam
+
+@{
+    ViewData["Title"] = "TakeExam";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-4">
+        <h2>Examination : @Model.Subject</h2>
+        <h3>Description : @Model.Description</h3>
+
+        @using (Html.BeginForm("TakeExam", "ExamAnswers", FormMethod.Post))
+        {
+            <input name="examId" value="@Model.id" hidden />
+            @foreach (var question in Model.Questions)
+            {
+                <div class="form-group">
+                    <label class="control-label">@question.question</label>
+
+                    <select name="@question.id" class="form-control">
+                        <option value="@question.option1">@question.option1</option>
+                        <option value="@question.option2">@question.option2</option>
+                        <option value="@question.option3">@question.option3</option>
+                        <option value="@question.option4">@question.option4</option>
+                    </select>
+                </div>
+            }
+
+
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        }
+    </div>
+</div>

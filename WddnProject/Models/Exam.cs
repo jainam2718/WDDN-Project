@@ -26,13 +26,11 @@ namespace WDDNProject.Models
         public virtual AppUser AppUser { get; set; }
 
         public int? GroupId { get; set; }
-        public virtual Group Group {get; set;}
+        public virtual Group Group { get; set; }
 
         public virtual ICollection<Questions> Questions { get; set; }
+
+        public virtual ICollection<Result> Results { get; set; }
     }
-
-
-
-
 
 }

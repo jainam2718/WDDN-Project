@@ -19,7 +19,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.Group)
             </th>
-            <th></th>
+            <th>
+                Total Students
+            </th>
         </tr>
     </thead>
     <tbody>
@@ -29,7 +31,10 @@
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Group.AppUserId)
+                @Html.DisplayFor(modelItem => item.Group.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Group.GroupMember.AppUserGroupMembers.Count)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.id">Edit</a> |

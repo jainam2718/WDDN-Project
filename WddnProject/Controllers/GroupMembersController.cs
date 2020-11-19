@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -11,6 +12,7 @@ using WDDNProject.Repository.Interfaces;
 
 namespace WDDNProject.Controllers
 {
+    [Authorize]
     public class GroupMembersController : Controller
     {
         private readonly AuthDbContext _context;
@@ -24,7 +26,7 @@ namespace WDDNProject.Controllers
         // GET: GroupMembers
         public async Task<IActionResult> Index()
         {
-            var authDbContext = _context.GroupMembers.Include(g => g.Group);
+            var authDbContext = _context.GroupMembers.Include(g => g.Group).Include(g => g.AppUserGroupMembers);
             return View(await authDbContext.ToListAsync());
         }
 

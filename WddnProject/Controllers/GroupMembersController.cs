@@ -66,7 +66,7 @@ namespace WDDNProject.Controllers
                 await _groupMember.CreateGroupMember(groupMember);
                 return RedirectToAction("Create", "AppUserGroupMembers", new { groupMemberId = groupMember.id });
             }
-            ViewData["GroupId"] = new SelectList(_context.Groups, "id", "AppUserId", groupMember.GroupId);
+            ViewData["GroupId"] = new SelectList(_context.Groups, "id", "Name", groupMember.GroupId);
             return View(groupMember);
         }
 
@@ -83,7 +83,7 @@ namespace WDDNProject.Controllers
             {
                 return NotFound();
             }
-            ViewData["GroupId"] = new SelectList(_context.Groups, "id", "AppUserId", groupMember.GroupId);
+            ViewData["GroupId"] = new SelectList(_context.Groups, "id", "Name", groupMember.GroupId);
             return View(groupMember);
         }
 
@@ -118,7 +118,7 @@ namespace WDDNProject.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["GroupId"] = new SelectList(_context.Groups, "id", "AppUserId", groupMember.GroupId);
+            ViewData["GroupId"] = new SelectList(_context.Groups, "id", "Name", groupMember.GroupId);
             return View(groupMember);
         }
 

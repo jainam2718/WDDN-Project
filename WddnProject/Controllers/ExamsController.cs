@@ -15,9 +15,11 @@ namespace WDDNProject.Controllers
     [Authorize]
     public class ExamsController : Controller
     {
+        private readonly AuthDbContext _context;
         private readonly IExamRepository _examRepository;
-        public ExamsController( IExamRepository examRepository)
+        public ExamsController( IExamRepository examRepository, AuthDbContext context)
         {
+            this._context = context;
             this._examRepository = examRepository;
         }
 
@@ -39,6 +41,7 @@ namespace WDDNProject.Controllers
             }
 
             var exam = await this._examRepository.GetExamById((int)id);
+            ViewData["GroupId"] = new SelectList(_context.Groups, "id", "Name", exam.GroupId);
             if (exam == null)
             {
                 return NotFound();
@@ -53,6 +56,7 @@ namespace WDDNProject.Controllers
             var claimsIdentity = (ClaimsIdentity)this.User.Identity;
             var claim = claimsIdentity.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier);
             ViewData["AppUserId"] = claim.Value;
+            ViewData["GroupId"] = new SelectList(_context.Groups, "id", "Name");
             var stime = DateTime.Now;
             ViewData["StartTime"] = stime;
             //ViewData["GroupId"] = new SelectList(_context.Groups, "id", "AppUserId");
@@ -74,7 +78,7 @@ namespace WDDNProject.Controllers
             var claimsIdentity = (ClaimsIdentity)this.User.Identity;
             var claim = claimsIdentity.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier);
             ViewData["AppUserId"] = claim.Value;
-            //ViewData["GroupId"] = new SelectList(_context.Groups, "id", "AppUserId", exam.GroupId);
+            ViewData["GroupId"] = new SelectList(_context.Groups, "id", "Name", exam.GroupId);
             return View(exam);
         }
 
@@ -94,7 +98,7 @@ namespace WDDNProject.Controllers
             var claimsIdentity = (ClaimsIdentity)this.User.Identity;
             var claim = claimsIdentity.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier);
             ViewData["AppUserId"] = claim.Value;
-            //ViewData["GroupId"] = new SelectList(_context.Groups, "id", "AppUserId", exam.GroupId);
+            ViewData["GroupId"] = new SelectList(_context.Groups, "id", "Name", exam.GroupId);
             return View(exam);
         }
 

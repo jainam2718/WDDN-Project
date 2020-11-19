@@ -8,7 +8,6 @@ namespace WDDNProject.Repository.Interfaces
 {
     public interface IAppUserGroupMemberRepository
     {
-        Task<AppUserGroupMember> GetAppUserGroupMemberById(int id);
         Task<IEnumerable<AppUserGroupMember>> GetAppUserGroupMembersByAppUserId(String id);
         Task<IEnumerable<AppUserGroupMember>> GetAppUserGroupMembersByGroupMemberId(int id);
         Task<int> CreateAppUserGroupMember(AppUserGroupMember appUserGroupMember);

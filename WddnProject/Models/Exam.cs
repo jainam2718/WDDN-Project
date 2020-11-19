@@ -21,7 +21,7 @@ namespace WDDNProject.Models
         [Required]
         [DataType(DataType.DateTime)]
         public DateTime EndTime { get; set; }
-
+        [Required]
         public String AppUserId { get; set; }
         public virtual AppUser AppUser { get; set; }
 
@@ -29,6 +29,8 @@ namespace WDDNProject.Models
         public virtual Group Group {get; set;}
 
         public virtual ICollection<Questions> Questions { get; set; }
+
+        public virtual ICollection<Result> Results { get; set; }
     }
 
 

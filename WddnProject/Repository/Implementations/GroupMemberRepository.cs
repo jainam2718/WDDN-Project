@@ -5,10 +5,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using WDDNProject.Data;
 using WDDNProject.Models;
+using WDDNProject.Repository.Interfaces;
 
 namespace WDDNProject.Repository.Implementations
 {
-    public class GroupMemberRepository
+    public class GroupMemberRepository : IGroupMemberRepository
     {
         private readonly AuthDbContext _context;
 

@@ -1,3 +1,5 @@
+A:\CE117_Sem5\WDDN-2020-21-Students\WDDNProject\WDDN-Project\WDDNProject\bin\Debug\netcoreapp3.1\runtimes\win-arm64\native\e_sqlite3.dll
+A:\CE117_Sem5\WDDN-2020-21-Students\WDDNProject\WDDN-Project\WDDNProject\bin\Debug\netcoreapp3.1\runtimes\win-x64\native\e_sqlite3.dll
 A:\CE117_Sem5\WDDN-2020-21-Students\WDDNProject\WDDN-Project\WDDNProject\bin\Debug\netcoreapp3.1\appsettings.Development.json
 A:\CE117_Sem5\WDDN-2020-21-Students\WDDNProject\WDDN-Project\WDDNProject\bin\Debug\netcoreapp3.1\appsettings.json
 A:\CE117_Sem5\WDDN-2020-21-Students\WDDNProject\WDDN-Project\WDDNProject\bin\Debug\netcoreapp3.1\Properties\launchSettings.json
@@ -149,13 +151,10 @@ A:\CE117_Sem5\WDDN-2020-21-Students\WDDNProject\WDDN-Project\WDDNProject\bin\Deb
 A:\CE117_Sem5\WDDN-2020-21-Students\WDDNProject\WDDN-Project\WDDNProject\bin\Debug\netcoreapp3.1\runtimes\linux-x86\native\libe_sqlite3.so
 A:\CE117_Sem5\WDDN-2020-21-Students\WDDNProject\WDDN-Project\WDDNProject\bin\Debug\netcoreapp3.1\runtimes\osx-x64\native\libe_sqlite3.dylib
 A:\CE117_Sem5\WDDN-2020-21-Students\WDDNProject\WDDN-Project\WDDNProject\bin\Debug\netcoreapp3.1\runtimes\win-arm\native\e_sqlite3.dll
-A:\CE117_Sem5\WDDN-2020-21-Students\WDDNProject\WDDN-Project\WDDNProject\bin\Debug\netcoreapp3.1\runtimes\win-arm64\native\e_sqlite3.dll
-A:\CE117_Sem5\WDDN-2020-21-Students\WDDNProject\WDDN-Project\WDDNProject\bin\Debug\netcoreapp3.1\runtimes\win-x64\native\e_sqlite3.dll
 A:\CE117_Sem5\WDDN-2020-21-Students\WDDNProject\WDDN-Project\WDDNProject\bin\Debug\netcoreapp3.1\runtimes\win-x86\native\e_sqlite3.dll
 A:\CE117_Sem5\WDDN-2020-21-Students\WDDNProject\WDDN-Project\WDDNProject\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp2.0\System.Runtime.Caching.dll
 A:\CE117_Sem5\WDDN-2020-21-Students\WDDNProject\WDDN-Project\WDDNProject\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.0\System.Runtime.Caching.dll
 A:\CE117_Sem5\WDDN-2020-21-Students\WDDNProject\WDDN-Project\WDDNProject\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
-A:\CE117_Sem5\WDDN-2020-21-Students\WDDNProject\WDDN-Project\WDDNProject\obj\Debug\netcoreapp3.1\WDDNProject.csprojAssemblyReference.cache
 A:\CE117_Sem5\WDDN-2020-21-Students\WDDNProject\WDDN-Project\WDDNProject\obj\Debug\netcoreapp3.1\WDDNProject.AssemblyInfoInputs.cache
 A:\CE117_Sem5\WDDN-2020-21-Students\WDDNProject\WDDN-Project\WDDNProject\obj\Debug\netcoreapp3.1\WDDNProject.AssemblyInfo.cs
 A:\CE117_Sem5\WDDN-2020-21-Students\WDDNProject\WDDN-Project\WDDNProject\obj\Debug\netcoreapp3.1\WDDNProject.csproj.CoreCompileInputs.cache
@@ -211,6 +210,11 @@ A:\CE117_Sem5\WDDN-2020-21-Students\WDDNProject\WDDN-Project\WDDNProject\obj\Deb
 A:\CE117_Sem5\WDDN-2020-21-Students\WDDNProject\WDDN-Project\WDDNProject\obj\Debug\netcoreapp3.1\Razor\Views\Exams\Details.cshtml.g.cs
 A:\CE117_Sem5\WDDN-2020-21-Students\WDDNProject\WDDN-Project\WDDNProject\obj\Debug\netcoreapp3.1\Razor\Views\Exams\Edit.cshtml.g.cs
 A:\CE117_Sem5\WDDN-2020-21-Students\WDDNProject\WDDN-Project\WDDNProject\obj\Debug\netcoreapp3.1\Razor\Views\Exams\Index.cshtml.g.cs
+A:\CE117_Sem5\WDDN-2020-21-Students\WDDNProject\WDDN-Project\WDDNProject\obj\Debug\netcoreapp3.1\Razor\Views\Groups\Create.cshtml.g.cs
+A:\CE117_Sem5\WDDN-2020-21-Students\WDDNProject\WDDN-Project\WDDNProject\obj\Debug\netcoreapp3.1\Razor\Views\Groups\Delete.cshtml.g.cs
+A:\CE117_Sem5\WDDN-2020-21-Students\WDDNProject\WDDN-Project\WDDNProject\obj\Debug\netcoreapp3.1\Razor\Views\Groups\Details.cshtml.g.cs
+A:\CE117_Sem5\WDDN-2020-21-Students\WDDNProject\WDDN-Project\WDDNProject\obj\Debug\netcoreapp3.1\Razor\Views\Groups\Edit.cshtml.g.cs
+A:\CE117_Sem5\WDDN-2020-21-Students\WDDNProject\WDDN-Project\WDDNProject\obj\Debug\netcoreapp3.1\Razor\Views\Groups\Index.cshtml.g.cs
 A:\CE117_Sem5\WDDN-2020-21-Students\WDDNProject\WDDN-Project\WDDNProject\obj\Debug\netcoreapp3.1\Razor\Views\Home\Index.cshtml.g.cs
 A:\CE117_Sem5\WDDN-2020-21-Students\WDDNProject\WDDN-Project\WDDNProject\obj\Debug\netcoreapp3.1\Razor\Views\Home\Privacy.cshtml.g.cs
 A:\CE117_Sem5\WDDN-2020-21-Students\WDDNProject\WDDN-Project\WDDNProject\obj\Debug\netcoreapp3.1\Razor\Views\Questions\Create.cshtml.g.cs
@@ -233,8 +237,4 @@ A:\CE117_Sem5\WDDN-2020-21-Students\WDDNProject\WDDN-Project\WDDNProject\obj\Deb
 A:\CE117_Sem5\WDDN-2020-21-Students\WDDNProject\WDDN-Project\WDDNProject\obj\Debug\netcoreapp3.1\WDDNProject.dll
 A:\CE117_Sem5\WDDN-2020-21-Students\WDDNProject\WDDN-Project\WDDNProject\obj\Debug\netcoreapp3.1\WDDNProject.pdb
 A:\CE117_Sem5\WDDN-2020-21-Students\WDDNProject\WDDN-Project\WDDNProject\obj\Debug\netcoreapp3.1\WDDNProject.genruntimeconfig.cache
-A:\CE117_Sem5\WDDN-2020-21-Students\WDDNProject\WDDN-Project\WDDNProject\obj\Debug\netcoreapp3.1\Razor\Views\Groups\Create.cshtml.g.cs
-A:\CE117_Sem5\WDDN-2020-21-Students\WDDNProject\WDDN-Project\WDDNProject\obj\Debug\netcoreapp3.1\Razor\Views\Groups\Delete.cshtml.g.cs
-A:\CE117_Sem5\WDDN-2020-21-Students\WDDNProject\WDDN-Project\WDDNProject\obj\Debug\netcoreapp3.1\Razor\Views\Groups\Details.cshtml.g.cs
-A:\CE117_Sem5\WDDN-2020-21-Students\WDDNProject\WDDN-Project\WDDNProject\obj\Debug\netcoreapp3.1\Razor\Views\Groups\Edit.cshtml.g.cs
-A:\CE117_Sem5\WDDN-2020-21-Students\WDDNProject\WDDN-Project\WDDNProject\obj\Debug\netcoreapp3.1\Razor\Views\Groups\Index.cshtml.g.cs
+A:\CE117_Sem5\WDDN-2020-21-Students\WDDNProject\WDDN-Project\WDDNProject\obj\Debug\netcoreapp3.1\WddnProject.csprojAssemblyReference.cache

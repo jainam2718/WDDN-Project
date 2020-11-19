@@ -15,7 +15,11 @@ namespace WDDNProject.Areas.Identity.Data
         
         public virtual ICollection<Group> Groups { get; set; }
 
+        public virtual ICollection<Result> Results { get; set; }
+
         public virtual IList<AppUserGroupMember> AppUserGroupMembers { get; set; }
+
+        
     }
 
 }

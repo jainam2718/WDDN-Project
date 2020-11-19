@@ -17,13 +17,6 @@ namespace WDDNProject.Repository.Implementations
         {
             this._context = context;
         }
-        public async Task<AppUserGroupMember> GetAppUserGroupMemberById(int id)
-        {
-            return await _context.AppUserGroupMembers
-                .Include(e => e.AppUser)
-                .Include(e => e.GroupMember)
-                .FirstOrDefaultAsync(m => m.id == id);
-        }
         public async Task<IEnumerable<AppUserGroupMember>> GetAppUserGroupMembersByAppUserId(String id)
         {
             return await _context.AppUserGroupMembers

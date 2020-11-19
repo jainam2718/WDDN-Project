@@ -26,7 +26,7 @@ namespace WDDNProject.Data
                     .IsRequired()
                     .HasForeignKey(e => e.AppUserId)
                     .OnDelete(DeleteBehavior.Cascade);
-                    
+
 
             builder.Entity<Exam>()
                     .HasOne<Group>(e => e.Group)
@@ -57,12 +57,20 @@ namespace WDDNProject.Data
                 .HasForeignKey(q => q.ExamId)
                 .OnDelete(DeleteBehavior.Cascade);
 
+            builder.Entity<Exam>()
+                    .HasMany<Result>(e => e.Results)
+                    .WithOne(r => r.Exam)
+                    .IsRequired()
+                    .HasForeignKey(r => r.ExamId)
+                    .OnDelete(DeleteBehavior.NoAction);
+
             base.OnModelCreating(builder);
             // Customize the ASP.NET Identity model and override the defaults if needed.
             // For example, you can rename the ASP.NET Identity table names and more.
             // Add your customizations after calling base.OnModelCreating(builder);
         }
-        
+
+        public DbSet<Result> Results { get; set; }
         public DbSet<AppUserGroupMember> AppUserGroupMembers { get; set; }
         public DbSet<Questions> Questions { get; set; }
         public DbSet<GroupMember> GroupMembers { get; set; }

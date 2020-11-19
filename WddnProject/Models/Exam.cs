@@ -29,6 +29,8 @@ namespace WDDNProject.Models
         public virtual Group Group {get; set;}
 
         public virtual ICollection<Questions> Questions { get; set; }
+
+        public virtual ICollection<Result> Results { get; set; }
     }
 
 

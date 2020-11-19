@@ -13,7 +13,7 @@ namespace WDDNProject.Models
         public string option2 { get; set; }
         public string option3 { get; set; }
         public string option4 { get; set; }
-        public int ans { get; set; }
+        public string ans { get; set; }
 
         public int ExamId { get; set; }
         public virtual Exam Exam { get; set; }

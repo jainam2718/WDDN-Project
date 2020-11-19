@@ -32,7 +32,7 @@
                 @Html.DisplayNameFor(model => model.ans)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Exam)
+                @Html.DisplayNameFor(model => model.Exam.Subject)
             </th>
             <th></th>
         </tr>
@@ -59,7 +59,7 @@
                 @Html.DisplayFor(modelItem => item.ans)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Exam.AppUserId)
+                @Html.DisplayFor(modelItem => item.Exam.Subject)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.id">Edit</a> |
@@ -70,3 +70,4 @@
 }
     </tbody>
 </table>
+<a href="/Questions/Create?examid=@ViewBag.examid" class="btn btn-primary">Add More Question</a>

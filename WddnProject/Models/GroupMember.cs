@@ -10,7 +10,9 @@ namespace WDDNProject.Models
     {
         public int id { get; set; }
 
-        public virtual ICollection<Group> Groups { get; set; }
+        public String Name { get; set; }
+        public int? GroupId { get; set; }
+        public virtual Group Group { get; set; }
 
         public IList<AppUserGroupMember> AppUserGroupMembers { get; set; }
 

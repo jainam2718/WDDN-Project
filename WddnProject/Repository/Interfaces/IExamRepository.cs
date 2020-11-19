@@ -14,5 +14,6 @@ namespace WDDNProject.Repository.Interfaces
         Task<int> CreateExam(Exam exam);
         Task<bool> UpdateExam(Exam exam);
         Task<int> DeleteExam(int id);
+        Task<IEnumerable<Exam>> GetExamsByGroupId(int id);
     }
 }

@@ -68,8 +68,8 @@ namespace WDDNProject.Controllers
         {
             if (ModelState.IsValid)
             {
-                var temp = await this._examRepository.CreateExam(exam);
-                return RedirectToAction("Create", "Questions", new { examId = exam.id });
+                await this._examRepository.CreateExam(exam);
+                return RedirectToAction("Create","Questions", new { examid = exam.id });
             }
             var claimsIdentity = (ClaimsIdentity)this.User.Identity;
             var claim = claimsIdentity.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier);

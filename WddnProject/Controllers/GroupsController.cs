@@ -49,7 +49,9 @@ namespace WDDNProject.Controllers
         // GET: Groups/Create
         public IActionResult Create()
         {
-            ViewData["AppUserId"] = new SelectList(_context.AppUsers, "Id", "UserName");
+            var claimsIdentity = (ClaimsIdentity)this.User.Identity;
+            var claim = claimsIdentity.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier);
+            ViewData["AppUserId"] = new SelectList(_context.AppUsers, "Id", "UserName", claim.Value);
             ViewData["GroupMemberId"] = new SelectList(_context.GroupMembers, "id", "id");
             return View();
         }

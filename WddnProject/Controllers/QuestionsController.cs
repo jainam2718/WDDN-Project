@@ -17,17 +17,32 @@ namespace WDDNProject.Controllers
     public class QuestionsController : Controller
     {
         private readonly AuthDbContext _context;
-        private readonly IQuestionsRepository _questionsRepository;
+        private readonly IQuestionsRepository _questionsRepository, _examRepository;
 
 
-        public QuestionsController(AuthDbContext context,IQuestionsRepository questionsRepository)
+        public QuestionsController(AuthDbContext context,IQuestionsRepository questionsRepository, IQuestionsRepository examRepository)
         {
             _context = context;
             this._questionsRepository = questionsRepository;
-            
+            this._examRepository = examRepository;
         }
 
-        
+        public async Task<IActionResult> Index(int? examid)
+        {
+            if (examid == null)
+            {
+                return NotFound();
+            }
+
+            var questions = await this._questionsRepository.GetQuestionsByExamId((int)examid);
+            ViewData["examid"] = examid;
+            if (questions == null)
+            {
+                return NotFound();
+            }
+
+            return View(questions);
+        }
 
         // GET: Questions/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -47,13 +62,11 @@ namespace WDDNProject.Controllers
         }
 
         // GET: Questions/Create
-        public IActionResult Create(int? examId)
+        public  IActionResult Create (int examid)
         {
-            if(examId == null)
-            {
-                return NotFound();
-            }
-            ViewData["ExamId"] = (int)examId;
+            
+            ViewData["ExamId"] = new SelectList(_context.Exams, "id", "Subject", examid);
+            //ViewData["ExamId"] = new SelectList(_context.Exams, "id", "id",id);
             return View();
         }
 
@@ -64,10 +77,12 @@ namespace WDDNProject.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("id,question,option1,option2,option3,option4,ans,ExamId")] Questions questions)
         {
+            
             if (ModelState.IsValid)
             {
+                //return View(questions);
                 var temp = await this._questionsRepository.CreateQuestion(questions);
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index", new { examid = questions.ExamId });
             }
             var claimsIdentity = (ClaimsIdentity)this.User.Identity;
             var claim = claimsIdentity.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier);

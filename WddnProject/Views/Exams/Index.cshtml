@@ -28,6 +28,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.AppUser)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Group)
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -47,7 +50,10 @@
                 @Html.DisplayFor(modelItem => item.EndTime)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.AppUser.FirstName) @Html.DisplayFor(modelItem => item.AppUser.LastName)
+                @Html.DisplayFor(modelItem => item.AppUser.UserName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Group.Name)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.id">Edit</a> |

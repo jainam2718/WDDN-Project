@@ -1,29 +1,47 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using WDDNProject.Data;
 using WDDNProject.Models;
+using WDDNProject.Repository.Interfaces;
 
 namespace WDDNProject.Controllers
 {
+    [Authorize]
     public class QuestionsController : Controller
     {
         private readonly AuthDbContext _context;
+        private readonly IQuestionsRepository _questionsRepository, _examRepository;
 
-        public QuestionsController(AuthDbContext context)
+
+        public QuestionsController(AuthDbContext context,IQuestionsRepository questionsRepository, IQuestionsRepository examRepository)
         {
             _context = context;
+            this._questionsRepository = questionsRepository;
+            this._examRepository = examRepository;
         }
 
-        // GET: Questions
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int? examid)
         {
-            var authDbContext = _context.Questions.Include(q => q.Exam);
-            return View(await authDbContext.ToListAsync());
+            if (examid == null)
+            {
+                return NotFound();
+            }
+
+            var questions = await this._questionsRepository.GetQuestionsByExamId((int)examid);
+            ViewData["examid"] = examid;
+            if (questions == null)
+            {
+                return NotFound();
+            }
+
+            return View(questions);
         }
 
         // GET: Questions/Details/5
@@ -34,9 +52,7 @@ namespace WDDNProject.Controllers
                 return NotFound();
             }
 
-            var questions = await _context.Questions
-                .Include(q => q.Exam)
-                .FirstOrDefaultAsync(m => m.id == id);
+            var questions = await this._questionsRepository.GetQuestionsById((int)id);
             if (questions == null)
             {
                 return NotFound();
@@ -46,10 +62,11 @@ namespace WDDNProject.Controllers
         }
 
         // GET: Questions/Create
-        public IActionResult Create(int? examId)
+        public  IActionResult Create (int examid)
         {
-
-            ViewData["examId"] = examId;
+            
+            ViewData["ExamId"] = new SelectList(_context.Exams, "id", "Subject", examid);
+            //ViewData["ExamId"] = new SelectList(_context.Exams, "id", "id",id);
             return View();
         }
 
@@ -58,15 +75,18 @@ namespace WDDNProject.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("id,question,option1,option2,option3,option4,answer,examId")] Questions questions)
+        public async Task<IActionResult> Create([Bind("id,question,option1,option2,option3,option4,ans,ExamId")] Questions questions)
         {
+            
             if (ModelState.IsValid)
             {
-                _context.Add(questions);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                //return View(questions);
+                var temp = await this._questionsRepository.CreateQuestion(questions);
+                return RedirectToAction("Index", new { examid = questions.ExamId });
             }
-            ViewData["id"] = new SelectList(_context.Exams, "id", "Subject", questions.id);
+            var claimsIdentity = (ClaimsIdentity)this.User.Identity;
+            var claim = claimsIdentity.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier);
+            ViewData["ExamId"] = new SelectList(_context.Exams.Where(e => e.AppUserId == claim.Value), "id", "AppUserId", questions.ExamId);
             return View(questions);
         }
 
@@ -78,12 +98,14 @@ namespace WDDNProject.Controllers
                 return NotFound();
             }
 
-            var questions = await _context.Questions.FindAsync(id);
+            var questions = await this._questionsRepository.GetQuestionsById((int)id);
             if (questions == null)
             {
                 return NotFound();
             }
-            ViewData["id"] = new SelectList(_context.Exams, "id", "Subject", questions.id);
+            var claimsIdentity = (ClaimsIdentity)this.User.Identity;
+            var claim = claimsIdentity.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier);
+            ViewData["ExamId"] = new SelectList(_context.Exams.Where(e => e.AppUserId == claim.Value) , "id", "AppUserId", questions.ExamId);
             return View(questions);
         }
 
@@ -92,7 +114,7 @@ namespace WDDNProject.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("id,question,option1,option2,option3,option4,answer")] Questions questions)
+        public async Task<IActionResult> Edit(int id, [Bind("id,question,option1,option2,option3,option4,ans,ExamId")] Questions questions)
         {
             if (id != questions.id)
             {
@@ -101,25 +123,16 @@ namespace WDDNProject.Controllers
 
             if (ModelState.IsValid)
             {
-                try
+                bool check = await this._questionsRepository.UpdateQuestion(questions);
+                if(!check)
                 {
-                    _context.Update(questions);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!QuestionsExists(questions.id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
+                    return NotFound();
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["id"] = new SelectList(_context.Exams, "id", "Subject", questions.id);
+            var claimsIdentity = (ClaimsIdentity)this.User.Identity;
+            var claim = claimsIdentity.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier);
+            ViewData["ExamId"] = new SelectList(_context.Exams.Where(e => e.AppUserId == claim.Value), "id", "AppUserId", questions.ExamId);
             return View(questions);
         }
 
@@ -131,9 +144,7 @@ namespace WDDNProject.Controllers
                 return NotFound();
             }
 
-            var questions = await _context.Questions
-                .Include(q => q.Exam)
-                .FirstOrDefaultAsync(m => m.id == id);
+            var questions = await this._questionsRepository.GetQuestionsById((int)id);
             if (questions == null)
             {
                 return NotFound();
@@ -147,15 +158,9 @@ namespace WDDNProject.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var questions = await _context.Questions.FindAsync(id);
-            _context.Questions.Remove(questions);
-            await _context.SaveChangesAsync();
+            await this._questionsRepository.DeleteQuestion(id);
             return RedirectToAction(nameof(Index));
         }
 
-        private bool QuestionsExists(int id)
-        {
-            return _context.Questions.Any(e => e.id == id);
-        }
     }
 }

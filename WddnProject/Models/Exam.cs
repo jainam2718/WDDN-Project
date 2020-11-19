@@ -2,10 +2,10 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 using WDDNProject.Areas.Identity.Data;
+using WDDNProject.Data;
 
 namespace WDDNProject.Models
 {
@@ -23,10 +23,16 @@ namespace WDDNProject.Models
         public DateTime EndTime { get; set; }
 
         public String AppUserId { get; set; }
-        public AppUser AppUser { get; set; }
+        public virtual AppUser AppUser { get; set; }
 
-       // [ForeignKey("id")]
-        public virtual ICollection<Questions> Questions { get; set; } 
+        public int? GroupId { get; set; }
+        public virtual Group Group {get; set;}
+
+        public virtual ICollection<Questions> Questions { get; set; }
     }
+
+
+
+
 
 }

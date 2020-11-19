@@ -40,7 +40,13 @@
             @Html.DisplayNameFor(model => model.AppUser)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.AppUser.Id)
+            @Html.DisplayFor(model => model.AppUser.UserName)
+        </dd class>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Group)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Group.Name)
         </dd class>
     </dl>
     

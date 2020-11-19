@@ -1,4 +1,4 @@
-﻿@model WDDNProject.Models.Group
+﻿@model WDDNProject.Models.Result
 
 @{
     ViewData["Title"] = "Create";
@@ -7,24 +7,29 @@
 
 <h1>Create</h1>
 
-<h4>Group</h4>
+<h4>Result</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
+                <label asp-for="totalMarks" class="control-label"></label>
+                <input asp-for="totalMarks" class="form-control" />
+                <span asp-validation-for="totalMarks" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="obtainedMarks" class="control-label"></label>
+                <input asp-for="obtainedMarks" class="form-control" />
+                <span asp-validation-for="obtainedMarks" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="AppUserId" class="control-label"></label>
-                <select asp-for="AppUserId" class ="form-control" hidden asp-items="ViewBag.AppUserId"></select>
+                <select asp-for="AppUserId" class ="form-control" asp-items="ViewBag.AppUserId"></select>
             </div>
             <div class="form-group">
-                <label asp-for="GroupMemberId" class="control-label"></label>
-                <select asp-for="GroupMemberId" class ="form-control" asp-items="ViewBag.GroupMemberId"></select>
+                <label asp-for="ExamId" class="control-label"></label>
+                <select asp-for="ExamId" class ="form-control" asp-items="ViewBag.ExamId"></select>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />

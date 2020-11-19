@@ -33,7 +33,6 @@ namespace WDDNProject.Repository.Implementations
         {
             
             return await _context.Groups.Include(e => e.GroupMember)
-                                            .ThenInclude(e => e.AppUserGroupMembers)
                                         .Include(e => e.AppUser)
                                               .Where(e => e.AppUserId == AppUserId)
                                               .ToListAsync();

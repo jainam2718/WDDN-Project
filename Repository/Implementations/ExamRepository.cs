@@ -32,7 +32,6 @@ namespace WDDNProject.Repository.Implementations
         {
             return await _context.Exams.Include(e => e.AppUser)
                                               .Include(e => e.Group)
-                                              .Include(e => e.Questions)
                                               .Where(e => e.AppUserId == AppUserId)
                                               .ToListAsync();
 
@@ -79,7 +78,6 @@ namespace WDDNProject.Repository.Implementations
         {
             return await _context.Exams.Include(e => e.AppUser)
                                               .Include(e => e.Group)
-                                              .Include(e => e.Questions)
                                               .Where(e => e.GroupId == id)
                                               .ToListAsync();
         } 

@@ -1,0 +1,73 @@
+﻿@model IEnumerable<WDDNProject.Models.Questions>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.question)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.option1)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.option2)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.option3)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.option4)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ans)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Exam.Subject)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.question)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.option1)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.option2)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.option3)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.option4)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ans)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Exam.Subject)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+<a href="/Questions/Create?examid=@ViewBag.examid" class="btn btn-primary">Add More Question</a>

@@ -237,4 +237,8 @@ A:\CE117_Sem5\WDDN-2020-21-Students\WDDNProject\WDDN-Project\WDDNProject\obj\Deb
 A:\CE117_Sem5\WDDN-2020-21-Students\WDDNProject\WDDN-Project\WDDNProject\obj\Debug\netcoreapp3.1\WDDNProject.dll
 A:\CE117_Sem5\WDDN-2020-21-Students\WDDNProject\WDDN-Project\WDDNProject\obj\Debug\netcoreapp3.1\WDDNProject.pdb
 A:\CE117_Sem5\WDDN-2020-21-Students\WDDNProject\WDDN-Project\WDDNProject\obj\Debug\netcoreapp3.1\WDDNProject.genruntimeconfig.cache
-A:\CE117_Sem5\WDDN-2020-21-Students\WDDNProject\WDDN-Project\WDDNProject\obj\Debug\netcoreapp3.1\WddnProject.csprojAssemblyReference.cache
+A:\CE117_Sem5\WDDN-2020-21-Students\WDDNProject\WDDN-Project\WDDNProject\obj\Debug\netcoreapp3.1\Razor\Views\Results\Create.cshtml.g.cs
+A:\CE117_Sem5\WDDN-2020-21-Students\WDDNProject\WDDN-Project\WDDNProject\obj\Debug\netcoreapp3.1\Razor\Views\Results\Delete.cshtml.g.cs
+A:\CE117_Sem5\WDDN-2020-21-Students\WDDNProject\WDDN-Project\WDDNProject\obj\Debug\netcoreapp3.1\Razor\Views\Results\Details.cshtml.g.cs
+A:\CE117_Sem5\WDDN-2020-21-Students\WDDNProject\WDDN-Project\WDDNProject\obj\Debug\netcoreapp3.1\Razor\Views\Results\Edit.cshtml.g.cs
+A:\CE117_Sem5\WDDN-2020-21-Students\WDDNProject\WDDN-Project\WDDNProject\obj\Debug\netcoreapp3.1\Razor\Views\Results\Index.cshtml.g.cs

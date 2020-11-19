@@ -22,7 +22,7 @@
   },
   "targets": {
     ".NETCoreApp,Version=v3.1": {
-      "WddnProject/1.0.0": {
+      "WDDNProject/1.0.0": {
         "dependencies": {
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "3.1.9",
           "Microsoft.AspNetCore.Identity.UI": "3.1.9",
@@ -294,10 +294,10 @@
           "WindowsBase": "4.0.0.0"
         },
         "runtime": {
-          "WddnProject.dll": {}
+          "WDDNProject.dll": {}
         },
         "compile": {
-          "WddnProject.dll": {}
+          "WDDNProject.dll": {}
         }
       },
       "Microsoft.AspNetCore.Cryptography.Internal/3.1.9": {
@@ -4081,7 +4081,7 @@
     }
   },
   "libraries": {
-    "WddnProject/1.0.0": {
+    "WDDNProject/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

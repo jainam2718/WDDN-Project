@@ -1,15 +1,15 @@
 {
   "format": 1,
   "restore": {
-    "A:\\CE117_Sem5\\WDDN-2020-21-Students\\WDDNProject\\WDDN-Project\\WDDNProject\\WddnProject.csproj": {}
+    "A:\\CE117_Sem5\\WDDN-2020-21-Students\\WDDNProject\\WDDN-Project\\WDDNProject\\WDDNProject.csproj": {}
   },
   "projects": {
-    "A:\\CE117_Sem5\\WDDN-2020-21-Students\\WDDNProject\\WDDN-Project\\WDDNProject\\WddnProject.csproj": {
+    "A:\\CE117_Sem5\\WDDN-2020-21-Students\\WDDNProject\\WDDN-Project\\WDDNProject\\WDDNProject.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "A:\\CE117_Sem5\\WDDN-2020-21-Students\\WDDNProject\\WDDN-Project\\WDDNProject\\WddnProject.csproj",
-        "projectName": "WddnProject",
-        "projectPath": "A:\\CE117_Sem5\\WDDN-2020-21-Students\\WDDNProject\\WDDN-Project\\WDDNProject\\WddnProject.csproj",
+        "projectUniqueName": "A:\\CE117_Sem5\\WDDN-2020-21-Students\\WDDNProject\\WDDN-Project\\WDDNProject\\WDDNProject.csproj",
+        "projectName": "WDDNProject",
+        "projectPath": "A:\\CE117_Sem5\\WDDN-2020-21-Students\\WDDNProject\\WDDN-Project\\WDDNProject\\WDDNProject.csproj",
         "packagesPath": "C:\\Users\\hp\\.nuget\\packages\\",
         "outputPath": "A:\\CE117_Sem5\\WDDN-2020-21-Students\\WDDNProject\\WDDN-Project\\WDDNProject\\obj\\",
         "projectStyle": "PackageReference",

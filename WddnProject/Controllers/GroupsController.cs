@@ -49,7 +49,9 @@ namespace WDDNProject.Controllers
         // GET: Groups/Create
         public IActionResult Create()
         {
-            ViewData["AppUserId"] = new SelectList(_context.AppUsers, "Id", "UserName");
+            var claimsIdentity = (ClaimsIdentity)this.User.Identity;
+            var claim = claimsIdentity.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier);
+            ViewData["AppUserId"] = new SelectList(_context.AppUsers, "Id", "UserName", claim.Value);
             ViewData["GroupMemberId"] = new SelectList(_context.GroupMembers, "id", "id");
             return View();
         }
@@ -66,8 +68,8 @@ namespace WDDNProject.Controllers
                 await this._groupRepository.CreateGroup(@group);
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["AppUserId"] = new SelectList(_context.AppUsers, "Id", "Id", @group.AppUserId);
-            ViewData["GroupMemberId"] = new SelectList(_context.GroupMembers, "id", "id", @group.GroupMemberId);
+            ViewData["AppUserId"] = new SelectList(_context.AppUsers, "Id", "Email", @group.AppUserId);
+            ViewData["GroupMemberId"] = new SelectList(_context.GroupMembers, "id", "Name", @group.GroupMemberId);
             return View(@group);
         }
 
@@ -84,8 +86,8 @@ namespace WDDNProject.Controllers
             {
                 return NotFound();
             }
-            ViewData["AppUserId"] = new SelectList(_context.AppUsers, "Id", "Id", @group.AppUserId);
-            ViewData["GroupMemberId"] = new SelectList(_context.GroupMembers, "id", "id", @group.GroupMemberId);
+            ViewData["AppUserId"] = new SelectList(_context.AppUsers, "Id", "Email", @group.AppUserId);
+            ViewData["GroupMemberId"] = new SelectList(_context.GroupMembers, "id", "Name", @group.GroupMemberId);
             return View(@group);
         }
 
@@ -110,8 +112,8 @@ namespace WDDNProject.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["AppUserId"] = new SelectList(_context.AppUsers, "Id", "Id", @group.AppUserId);
-            ViewData["GroupMemberId"] = new SelectList(_context.GroupMembers, "id", "id", @group.GroupMemberId);
+            ViewData["AppUserId"] = new SelectList(_context.AppUsers, "Id", "Email", @group.AppUserId);
+            ViewData["GroupMemberId"] = new SelectList(_context.GroupMembers, "id", "Name", @group.GroupMemberId);
             return View(@group);
         }
 

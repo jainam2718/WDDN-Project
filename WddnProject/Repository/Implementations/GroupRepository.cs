@@ -21,16 +21,20 @@ namespace WDDNProject.Repository.Implementations
         public async Task<Group> GetGroupById(int id)
         {
             return await _context.Groups
-                .Include(e => e.AppUser)
                 .Include(e => e.GroupMember)
+                    .ThenInclude(e => e.AppUserGroupMembers)
+                        .ThenInclude(e => e.AppUser)
+                .Include(e => e.AppUser)
                 .FirstOrDefaultAsync(m => m.id == id);
 
         }
 
         public async Task<IEnumerable<Group>> GetGroupsByAppUserId(String AppUserId)
         {
-            return await _context.Groups.Include(e => e.AppUser)
-                                              .Include(e => e.GroupMember)
+            
+            return await _context.Groups.Include(e => e.GroupMember)
+                                            .ThenInclude(e => e.AppUserGroupMembers)
+                                        .Include(e => e.AppUser)
                                               .Where(e => e.AppUserId == AppUserId)
                                               .ToListAsync();
 

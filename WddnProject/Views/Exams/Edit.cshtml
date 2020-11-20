@@ -1,9 +1,7 @@
 ﻿@model WDDNProject.Models.Exam
 
-@{
-    ViewData["Title"] = "Edit";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
+@{ ViewData["Title"] = "Edit";
+                Layout = "~/Views/Shared/_Layout.cshtml"; }
 
 <h1>Edit</h1>
 
@@ -24,18 +22,19 @@
                 <input asp-for="Description" class="form-control" />
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="input-append date form_datetime">
                 <label asp-for="StartTime" class="control-label"></label>
-                <input type="datetime" asp-for="StartTime" value="@ViewBag.StartTime" min="@ViewBag.StartTime" class="form-control" />
+                <input type="datetime-local" asp-for="StartTime" value="@ViewBag.StartTime" min="@ViewBag.StartTime" class="form-control" />
+                <span class="add-on"><i class="icon-th"></i></span>
                 <span asp-validation-for="StartTime" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="EndTime" class="control-label"></label>
-                <input type="datetime" asp-for="EndTime" value="@ViewBag.StartTime" min="@ViewBag.StartTime" class="form-control" />
+                <input type="datetime-local" asp-for="EndTime" value="@ViewBag.StartTime" min="@ViewBag.StartTime" class="form-control" />
                 <span asp-validation-for="EndTime" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input asp-for="AppUserId" value="@ViewBag.AppUserId" class="form-control" />
+                <input asp-for="AppUserId" hidden value="@ViewBag.AppUserId" class="form-control" />
 
             </div>
             <div class="form-group">
@@ -56,4 +55,9 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+<script type="text/javascript">
+    $(".form_datetime").datetimepicker({
+        format: "dd MM yyyy - hh:ii"
+    });
+</script>
 }

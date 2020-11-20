@@ -16,8 +16,10 @@ namespace WDDNProject.Controllers
     public class ExamsController : Controller
     {
         private readonly IExamRepository _examRepository;
-        public ExamsController( IExamRepository examRepository)
+        private readonly IGroupRepository _groupRepository;
+        public ExamsController(IExamRepository examRepository, IGroupRepository groupRepository)
         {
+            this._groupRepository = groupRepository;
             this._examRepository = examRepository;
         }
 
@@ -48,14 +50,14 @@ namespace WDDNProject.Controllers
         }
 
         // GET: Exams/Create
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
             var claimsIdentity = (ClaimsIdentity)this.User.Identity;
             var claim = claimsIdentity.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier);
             ViewData["AppUserId"] = claim.Value;
             var stime = DateTime.Now;
             ViewData["StartTime"] = stime;
-            //ViewData["GroupId"] = new SelectList(_context.Groups, "id", "AppUserId");
+            ViewData["GroupId"] = new SelectList(await _groupRepository.GetGroupsByAppUserId(claim.Value), "id", "Name");
             return View();
         }
 
@@ -68,8 +70,8 @@ namespace WDDNProject.Controllers
         {
             if (ModelState.IsValid)
             {
-                var temp = await this._examRepository.CreateExam(exam);
-                return RedirectToAction("Create", "Questions", new { examId = exam.id });
+                await this._examRepository.CreateExam(exam);
+                return RedirectToAction("Create", "Questions", new { examid = exam.id });
             }
             var claimsIdentity = (ClaimsIdentity)this.User.Identity;
             var claim = claimsIdentity.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier);
@@ -94,6 +96,8 @@ namespace WDDNProject.Controllers
             var claimsIdentity = (ClaimsIdentity)this.User.Identity;
             var claim = claimsIdentity.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier);
             ViewData["AppUserId"] = claim.Value;
+            ViewData["GroupId"] = new SelectList(await _groupRepository.GetGroupsByAppUserId(claim.Value), "id", "Name");
+
             //ViewData["GroupId"] = new SelectList(_context.Groups, "id", "AppUserId", exam.GroupId);
             return View(exam);
         }
@@ -112,13 +116,15 @@ namespace WDDNProject.Controllers
                 bool check = await this._examRepository.UpdateExam(exam);
                 if (!check)
                 {
-                    return NotFound();   
+                    return NotFound();
                 }
                 return RedirectToAction(nameof(Index));
             }
             var claimsIdentity = (ClaimsIdentity)this.User.Identity;
             var claim = claimsIdentity.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier);
             ViewData["AppUserId"] = claim.Value;
+            ViewData["GroupId"] = new SelectList(await _groupRepository.GetGroupsByAppUserId(claim.Value), "id", "Name");
+
             //ViewData["GroupId"] = new SelectList(_context.Groups, "id", "AppUserId", exam.GroupId);
             return View(exam);
         }

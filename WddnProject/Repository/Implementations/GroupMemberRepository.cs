@@ -9,7 +9,7 @@ using WDDNProject.Repository.Interfaces;
 
 namespace WDDNProject.Repository.Implementations
 {
-    public class GroupMemberRepository : IGroupMemberRepository
+    public class GroupMemberRepository: IGroupMemberRepository
     {
         private readonly AuthDbContext _context;
 
@@ -21,11 +21,15 @@ namespace WDDNProject.Repository.Implementations
         public async Task<GroupMember> GetGroupMemberById(int id)
         {
             return await _context.GroupMembers.Include(g => g.Group)
+                                              .Include(g => g.AppUserGroupMembers)
+                                                    .ThenInclude(g => g.AppUser)
                                                .FirstOrDefaultAsync(g => g.id == id);
         }
         public async Task<GroupMember> GetGroupMemberByGroupId(int id)
         {
             return await _context.GroupMembers.Include(g => g.Group)
+                                              .Include(g => g.AppUserGroupMembers)
+                                                    .ThenInclude(g => g.AppUser)
                                               .FirstOrDefaultAsync(g => g.GroupId == id);
         }
         public async Task<int> CreateGroupMember(GroupMember groupMember)

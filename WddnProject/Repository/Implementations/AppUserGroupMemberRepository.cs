@@ -17,6 +17,7 @@ namespace WDDNProject.Repository.Implementations
         {
             this._context = context;
         }
+
         public async Task<IEnumerable<AppUserGroupMember>> GetAppUserGroupMembersByAppUserId(String id)
         {
             return await _context.AppUserGroupMembers
@@ -38,9 +39,8 @@ namespace WDDNProject.Repository.Implementations
             _context.Add(appUserGroupMember);
             return await _context.SaveChangesAsync();
         }
-        public async Task<int> DeleteAppUserGroupMember(int id)
+        public async Task<int> DeleteAppUserGroupMember(AppUserGroupMember appUserGroupMember)
         {
-            var appUserGroupMember = await _context.AppUserGroupMembers.FindAsync(id);
             _context.AppUserGroupMembers.Remove(appUserGroupMember);
             return await _context.SaveChangesAsync();
         }

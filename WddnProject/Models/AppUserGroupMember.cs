@@ -9,10 +9,10 @@ namespace WDDNProject.Models
 {
     public class AppUserGroupMember
     {
-        [Required]
+
         public String AppUserId { get; set; }
         public virtual AppUser AppUser { get; set; }
-        [Required]
+
         public int GroupMemberId { get; set; }
         public virtual GroupMember GroupMember { get; set; }
     }

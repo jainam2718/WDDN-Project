@@ -9,6 +9,7 @@ namespace WDDNProject.Models
 {
     public class Result
     {
+
         public int id { get; set; }
         [Required]
         public int totalMarks { get; set; }
@@ -17,7 +18,7 @@ namespace WDDNProject.Models
         [Required]
         public String AppUserId { get; set; }
         public virtual AppUser AppUser { get; set; }
-        
+
         public int ExamId { get; set; }
         public virtual Exam Exam { get; set; }
     }
